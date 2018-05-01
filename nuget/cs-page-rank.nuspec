@@ -12,7 +12,7 @@
     <description>Page Rank</description>
     <releaseNotes>Page Rank in .NET 4.6.1</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>Page Rank, Link Retrieval, c-sharp</tags>
+    <tags>Page Rank, Link Analysis, c-sharp</tags>
     <dependencies>
       
     </dependencies>

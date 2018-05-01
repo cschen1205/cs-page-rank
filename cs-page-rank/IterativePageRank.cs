@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PageRank
 {
-    public class PageRankInOrig
+    public class IterativePageRank
     {
         protected int mPageCount;
         protected bool[,] mL;
@@ -20,7 +20,7 @@ namespace PageRank
             set { mParallel = value; }
         }
 
-        public PageRankInOrig(int page_count, float damping_factor = 0.85f)
+        public IterativePageRank(int page_count, float damping_factor = 0.85f)
         {
             mPageCount = page_count;
             mAlpha = damping_factor;
@@ -29,12 +29,12 @@ namespace PageRank
             mC = new float[page_count];
         }
 
-        public void CreateLink(int from_page_index, int to_page_index)
+        public void AddLink(int from_page_index, int to_page_index)
         {
             mL[from_page_index, to_page_index] = true;
         }
 
-        public void SetPageOutLinkCount(int page_index, int out_link_count)
+        private void SetPageOutLinkCount(int page_index, int out_link_count)
         {
             if (out_link_count > 0)
             {
@@ -42,10 +42,36 @@ namespace PageRank
             }
         }
 
-        public float[] Run(double tolerance)
+        private int[] CollectOutLinkCount()
         {
+            int[] result = new int[mPageCount];
+            for (int i = 0; i < mPageCount; ++i)
+            {
+                int count = 0;
+                for (int j = 0; j < mPageCount; ++j)
+                {
+                    if (mL[i, j])
+                    {
+                        count++;
+                    }
+                }
+                result[i] = count;
+            }
+            return result;
+        }
+
+        public float[] RankPages(double tolerance)
+        {
+            int[] outLinkCount = CollectOutLinkCount();
+            for (int i = 0; i < mPageCount; ++i)
+            {
+                SetPageOutLinkCount(i, outLinkCount[i]);
+            }
+
             float[] P = new float[mPageCount];
             float[] P_prev = new float[mPageCount];
+
+            double diff = 0;
 			
 			for(int i=0; i < mPageCount; ++i)
 			{
@@ -57,6 +83,8 @@ namespace PageRank
             {
                 tasks = new Task[mPageCount];
             }
+
+            int iteration = 0;
 
             float P_val = 0;
             do
@@ -76,7 +104,7 @@ namespace PageRank
                             float val = 0;
                             for (int i = 0; i < mPageCount; ++i)
                             {
-                                val += (1 - mAlpha) * (mL[i, j] ? mC[i] : 0) * P[i] + mAlpha * P[i] / mPageCount;
+                                val += (1 - mAlpha) * (mL[i, task_j] ? mC[i] : 0) * P[i] + mAlpha * P[i] / mPageCount;
                             }
 							
                             P[task_j] = val;
@@ -97,7 +125,10 @@ namespace PageRank
                 {
                     Task.WaitAll(tasks);
                 }
-            } while (Diff(P, P_prev) > tolerance);
+                iteration++;
+                diff = Diff(P, P_prev);
+                Console.WriteLine("Iteration: {0}, RMSE: {1}", iteration, diff);
+            } while (diff > tolerance);
 
             return P;
         }

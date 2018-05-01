@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using MathNet.Numerics.LinearAlgebra.Single;
 using MathNet.Numerics.LinearAlgebra.Generic;
 
 namespace PageRank
 {
-    public class PageRankInMatrix
+    public class MatrixIterativePageRank
     {
         public delegate Matrix<float> MatrixGenerator(int page_count);
         protected int mPageCount;
@@ -15,7 +12,7 @@ namespace PageRank
         protected Matrix<float> mC;
         protected float mDampingFactor;
 
-        public PageRankInMatrix(int page_count, float damping_factor = 0.85f, MatrixGenerator generator = null)
+        public MatrixIterativePageRank(int page_count, float damping_factor = 0.85f, MatrixGenerator generator = null)
         {
             mPageCount = page_count;
             mDampingFactor = damping_factor;
@@ -31,7 +28,7 @@ namespace PageRank
             mC = new SparseMatrix(page_count, page_count);
         }
 
-        public void CreateLink(int from_page_index, int to_page_index)
+        public void AddLink(int from_page_index, int to_page_index)
         {
             mL[from_page_index, to_page_index] = 1;
         }
@@ -65,7 +62,7 @@ namespace PageRank
             return result;
         }
 
-        public double[] Run(double tolerance)
+        public double[] RankPages(double tolerance)
         {
             int[] outLinkCount = CollectOutLinkCount();
             for(int i=0; i < mPageCount; ++i)
@@ -81,11 +78,16 @@ namespace PageRank
             Matrix<float> e_1_minus_d = new DenseMatrix(mPageCount, 1, 1 - mDampingFactor);
             Matrix<float> e_d = new DenseMatrix(mPageCount, 1, mDampingFactor);
 
+            int iteration = 0;
+            double cost;
             do
             {
                 P_prev = P;
                 P = e_1_minus_d + A_transpose.Multiply(P).PointwiseMultiply(e_d);
-            } while (Diff(P, P_prev) > tolerance);
+                cost = Diff(P, P_prev);
+                iteration++;
+                Console.WriteLine("Iteration: {0}, RMSE: {1}", iteration, cost);
+            } while (cost > tolerance);
 
             double[] P_result = new double[mPageCount];
             for (int i = 0; i < mPageCount; ++i)

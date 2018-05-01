@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageRankInMatrix.cs" />
-    <Compile Include="PageRankInOrig.cs" />
+    <Compile Include="MatrixIterativePageRank.cs" />
+    <Compile Include="IterativePageRank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
