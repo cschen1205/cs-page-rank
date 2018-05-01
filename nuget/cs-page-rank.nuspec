@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>cs-page-rank</id>
+    <version>1.0.1</version>
+    <authors>cschen1205</authors>
+    <owners>cschen1205</owners>
+    <licenseUrl>https://github.com/cschen1205/cs-page-rank/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/cschen1205/cs-page-rank</projectUrl>
+    <iconUrl>https://rawgit.com/cschen1205/cs-page-rank/master/icon.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Page Rank</description>
+    <releaseNotes>Page Rank in .NET 4.6.1</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Page Rank, Link Retrieval, c-sharp</tags>
+    <dependencies>
+      
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs-page-rank", "cs-page-rank\cs-page-rank.csproj", "{06446AFE-0A72-4F12-8064-4D6E7DCAB2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs-page-rank-samples", "cs-page-rank-samples\cs-page-rank-samples.csproj", "{3474F9A2-C918-41BE-BABA-C88C72EDF462}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06446AFE-0A72-4F12-8064-4D6E7DCAB2B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06446AFE-0A72-4F12-8064-4D6E7DCAB2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06446AFE-0A72-4F12-8064-4D6E7DCAB2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06446AFE-0A72-4F12-8064-4D6E7DCAB2B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3474F9A2-C918-41BE-BABA-C88C72EDF462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3474F9A2-C918-41BE-BABA-C88C72EDF462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3474F9A2-C918-41BE-BABA-C88C72EDF462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3474F9A2-C918-41BE-BABA-C88C72EDF462}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
